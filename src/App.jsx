@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import CartPanel from './components/CartPanel'
 import { EmptyState, ErrorMessage, LoadingState } from './components/StatusViews'
+import AdminPage from './pages/AdminPage'
 import EventsPage from './pages/EventsPage'
 import EventDetailPage from './pages/EventDetailPage'
 import SeatsPage from './pages/SeatsPage'
@@ -20,9 +21,9 @@ import { logoutUser } from './services/auth'
 import { getEventStatus, getTakenSeats } from './utils/seats'
 
 // Vistas que exigen sesión iniciada
-const PROTECTED_VIEWS = ['seats', 'payment', 'confirmation', 'tickets', 'profile']
+const PROTECTED_VIEWS = ['seats', 'payment', 'confirmation', 'tickets', 'profile', 'admin']
 // Vistas que necesitan los eventos ya cargados
-const NEEDS_EVENTS = ['detail', 'seats', 'payment', 'confirmation', 'tickets']
+const NEEDS_EVENTS = ['detail', 'seats', 'payment', 'confirmation', 'tickets', 'admin']
 
 const EMPTY_CART = { eventId: null, seats: [] }
 
@@ -37,6 +38,7 @@ const TITLES = {
   login: 'Iniciar sesión',
   register: 'Crear cuenta',
   profile: 'Mi perfil',
+  admin: 'Panel de administración',
 }
 
 function App() {
@@ -150,6 +152,18 @@ function App() {
         </div>
       )
     }
+
+    if (name === 'admin') {
+  return (
+    <AdminPage
+      user={user}
+      events={events}
+      orders={orders}
+      onSelectEvent={(id) => navigate('detail', { eventId: id })}
+      onGoEvents={() => navigate('events')}
+    />
+  )
+}
 
     const event = events.find((e) => e.id === params.eventId)
     const goEvents = () => navigate('events')
