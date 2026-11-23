@@ -37,7 +37,7 @@ La contraseña de todas es `Password123!`. También se puede crear una cuenta nu
 - **Estado vacío:** buscar un texto que no coincida con ningún evento.
 - **Asientos ya vendidos:** al terminar una compra, esos asientos aparecen como no disponibles en el mapa.
 
-## Módulos del MVP cubiertos (6 de 8)
+## Módulos del MVP cubiertos (8 de 8)
 
 | # | Módulo | Estado | Dónde |
 |---|---|---|---|
@@ -47,8 +47,8 @@ La contraseña de todas es `Password123!`. También se puede crear una cuenta nu
 | 4 | Proceso de compra | Implementado | Selección de asientos, carrito, resumen y flujo de 4 pasos con indicador de progreso. `SeatsPage`, `CartPanel`, `OrderSummary`, `StepIndicator` |
 | 5 | Sistema de pagos | Implementado | Tarjeta, PayPal y Bitcoin simulados, validación, confirmación y estados de éxito/error. `PaymentPage`, `fakeApi.js` |
 | 6 | Boletos electrónicos | Implementado | Boleto con código QR, "Mis boletos" y descarga por impresión. `TicketCard`, `MyTicketsPage` |
-| 7 | Panel de administración | **Pendiente** | El diseño existe en Figma; el enlace del menú muestra "Sección en construcción". |
-| 8 | Reportes y analítica | **Pendiente** | Depende del módulo 7. |
+| 7 | Panel de administración | Implementado | Dashboard con indicadores, inventario y precios por evento (con filtros por categoría y estado) y directorio de usuarios con roles (filtro por rol). Solo accesible para administrador y organizador; un cliente ve un aviso de acceso restringido. `AdminPage` (menú de usuario → "Panel de administración") |
+| 8 | Reportes y analítica | Implementado | Tarjetas y gráficos de barras estáticos: ingresos y ocupación por evento, ventas por categoría y periodo, y rendimiento por zona. Se calculan a partir de los eventos y las órdenes guardadas. `AdminPage` (pestaña "Reportes") |
 
 ## Flujo principal
 
@@ -143,6 +143,7 @@ Probado a **375 px** (móvil), **768 px** (tablet) y **1440 px** (escritorio), s
 | Confirmación y boleto | [ver](docs/capturas/375/08-confirmacion-boleto.png) | [ver](docs/capturas/768/08-confirmacion-boleto.png) | [ver](docs/capturas/1440/08-confirmacion-boleto.png) |
 | Mis boletos | [ver](docs/capturas/375/09-mis-boletos.png) | [ver](docs/capturas/768/09-mis-boletos.png) | [ver](docs/capturas/1440/09-mis-boletos.png) |
 | Perfil | [ver](docs/capturas/375/10-perfil.png) | [ver](docs/capturas/768/10-perfil.png) | [ver](docs/capturas/1440/10-perfil.png) |
+| Panel de administración y reportes | [ver](docs/capturas/375/11-admin.png) | [ver](docs/capturas/768/11-admin.png) | [ver](docs/capturas/1440/11-admin.png) |
 
 ## Limitaciones y decisiones de diseño
 
@@ -152,7 +153,7 @@ Probado a **375 px** (móvil), **768 px** (tablet) y **1440 px** (escritorio), s
 - **Selección por asiento** en lugar de "zona y cantidad": cubre el requisito (el usuario elige zona y cuántos boletos) con el mapa del prototipo. El carrito admite un solo evento a la vez y hasta 8 asientos.
 - **Contraste:** el texto blanco sobre el naranja de los botones (fiel al Figma) tiene una relación de 2.9:1, por debajo del 4.5:1 recomendado por WCAG AA. Una mejora futura es usar texto azul marino sobre el naranja (4.8:1).
 - **Inicio de sesión con Google** es una simulación que entra con una cuenta de demostración.
-- Los módulos 7 y 8 (administración y reportes) están diseñados en Figma pero **no implementados** en esta entrega.
+-  **Panel de administración y reportes** de solo lectura: muestran datos simulados y las órdenes del navegador; no permiten crear, editar ni eliminar eventos, precios o usuarios. Los gráficos son barras hechas con CSS, sin librería de gráficos
 
 ## Reparto de trabajo
 
