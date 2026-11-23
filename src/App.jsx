@@ -1,122 +1,228 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import heroImg from "./assets/hero.png";
+import AuthView from "./components/AuthView";
+import ProfileView from "./components/ProfileView";
+import { getActiveSession, logoutUser } from "./services/auth";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [session, setSession] = useState(() => getActiveSession());
+  // Vistas base de tu parte: "home" | "login" | "register" | "profile"
+  const [view, setView] = useState(() => (getActiveSession() ? "home" : "login"));
+
+  const handleAuthSuccess = (user) => {
+    setSession(user);
+    setView("home");
+  };
+
+  const handleLogout = () => {
+    logoutUser();
+    setSession(null);
+    setView("login");
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div className="app-shell">
+      <header
+        style={{
+          backgroundColor: "var(--color-primary)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+          paddingBlock: "12px",
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "12px",
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
+          <button
+            type="button"
+            onClick={() => setView("home")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              background: "transparent",
+              border: "none",
+              padding: 0,
+              color: "#ffffff",
+              fontWeight: 800,
+              fontSize: "18px",
+            }}
+          >
+            <img
+              src={heroImg}
+              alt="Easy Ticket"
+              style={{
+                width: "36px",
+                height: "36px",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+            <span>Easy Ticket</span>
+          </button>
 
-      <div className="ticks"></div>
+          <nav
+            aria-label="Navegación principal"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "14px",
+              fontSize: "13px",
+              fontWeight: 600,
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setView("home")}
+              style={{
+                background: "transparent",
+                border: "none",
+                color: view === "home" ? "var(--color-sky)" : "#ffffff",
+                fontWeight: 600,
+                padding: "4px 6px",
+              }}
+            >
+              Inicio
+            </button>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+            {session ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setView("profile")}
+                  style={{
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.25)",
+                    borderRadius: "999px",
+                    color: "#ffffff",
+                    fontWeight: 600,
+                    padding: "6px 12px",
+                  }}
+                >
+                  {session.name}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    color: "var(--color-orange)",
+                    fontWeight: 700,
+                    padding: "4px 6px",
+                  }}
+                >
+                  Salir
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setView("login")}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    color: view === "login" ? "var(--color-sky)" : "#ffffff",
+                    fontWeight: 600,
+                    padding: "4px 6px",
+                  }}
+                >
+                  Iniciar sesión
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setView("register")}
+                  style={{
+                    backgroundColor: "var(--color-orange)",
+                    border: "none",
+                    borderRadius: "8px",
+                    color: "#ffffff",
+                    fontWeight: 700,
+                    padding: "7px 12px",
+                  }}
+                >
+                  Registrarse
+                </button>
+              </>
+            )}
+          </nav>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <main>
+        {view === "login" && (
+          <AuthView
+            key="login"
+            initialMode="login"
+            onAuthSuccess={handleAuthSuccess}
+            onNavigate={setView}
+          />
+        )}
+
+        {view === "register" && (
+          <AuthView
+            key="register"
+            initialMode="register"
+            onAuthSuccess={handleAuthSuccess}
+            onNavigate={setView}
+          />
+        )}
+
+        {view === "profile" && (
+          <ProfileView
+            session={session}
+            onSessionChange={setSession}
+            onNavigate={setView}
+          />
+        )}
+
+        {view === "home" && (
+          <section className="container" style={{ paddingBlock: "36px" }}>
+            <div
+              style={{
+                backgroundColor: "rgba(255, 255, 255, 0.06)",
+                border: "1px solid rgba(255, 255, 255, 0.14)",
+                borderRadius: "16px",
+                padding: "24px",
+              }}
+            >
+              <h1 style={{ fontSize: "24px", marginBottom: "8px" }}>
+                Tu próxima experiencia cultural[cite: 5, 6, 7]
+              </h1>
+              <p
+                style={{
+                  margin: "0 0 16px",
+                  color: "var(--text-on-dark-muted)",
+                  fontSize: "14px",
+                }}
+              >
+                {session
+                  ? `Sesión activa en localStorage: ${session.name} (${session.email}).`
+                  : "No has iniciado sesión. Puedes ingresar o registrarte desde el menú superior."}
+              </p>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: "13px",
+                  color: "var(--color-sky)",
+                }}
+              >
+                Espacio base listo para integrar el listado de eventos,
+                detalle, selección de asientos/zona, carrito, pago simulado y
+                boleto QR.
+              </p>
+            </div>
+          </section>
+        )}
+      </main>
+    </div>
+  );
 }
-
-export default App
