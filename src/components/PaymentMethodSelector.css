@@ -1,0 +1,24 @@
+.methods { display: grid; gap: var(--space-2); margin: 0; padding: 0; border: 0; min-width: 0; }
+.methods__option { position: relative; display: block; cursor: pointer; }
+.methods__option input { position: absolute; opacity: 0; inset: 0; }
+.methods__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 8px 12px;
+  border: 3px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-white);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-align: center;
+}
+.methods__option input:checked + .methods__box { border-color: var(--color-accent); }
+.methods__option input:focus-visible + .methods__box { outline: 3px solid var(--color-link); outline-offset: 2px; }
+
+@media (min-width: 768px) {
+  .methods { grid-template-columns: repeat(3, 1fr); }
+}

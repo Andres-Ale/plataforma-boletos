@@ -1,0 +1,7 @@
+.zone-legend { display: grid; gap: var(--space-2); margin: var(--space-3) 0 0; padding: 0; list-style: none; font-size: 0.875rem; font-weight: 700; }
+.zone-legend li { display: flex; align-items: center; gap: 10px; }
+.zone-legend__swatch { flex: none; width: 16px; height: 16px; border-radius: 4px; }
+.zone-legend__swatch--vip { background: var(--color-accent); border-radius: 50%; }
+.zone-legend__swatch--diamante { background: var(--color-link); }
+.zone-legend__swatch--palco { background: var(--color-warning); }
+.zone-legend__swatch--taken { background: var(--color-border); }

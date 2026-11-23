@@ -1,0 +1,16 @@
+.category-tabs { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); scroll-margin-top: 80px; }
+
+.category-tabs__btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid var(--color-white);
+  background: transparent;
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.category-tabs__btn[aria-pressed='true'] {
+  background: var(--color-white);
+  color: var(--color-primary);
+}

@@ -1,0 +1,74 @@
+.seat-map { max-width: 760px; margin-inline: auto; }
+
+.seat-map__stage {
+  max-width: 280px;
+  margin: 0 auto var(--space-4);
+  padding: 14px;
+  background: #d9d9d9;
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+.seat-map__grid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'pa vip pb'
+    'pa dia pb'
+    '. pc .';
+  gap: 10px;
+}
+
+.zone { display: flex; border-radius: 14px; padding: 8px; color: var(--color-text); }
+.zone--vip { background: var(--color-accent); }
+.zone--diamante { background: var(--color-link); }
+.zone--palco { background: var(--color-warning); }
+
+.zone--pa { grid-area: pa; align-items: center; gap: 4px; }
+.zone--pb { grid-area: pb; align-items: center; gap: 4px; }
+.zone--vip-area { grid-area: vip; flex-direction: column; align-items: center; gap: 6px; }
+.zone--dia { grid-area: dia; flex-direction: column; align-items: center; gap: 10px; min-height: 150px; }
+.zone--pc { grid-area: pc; flex-direction: column; align-items: center; gap: 6px; }
+
+.zone__title { font-size: 1rem; font-weight: 700; }
+.zone__title--vertical { writing-mode: vertical-rl; }
+.zone__title--flip { transform: rotate(180deg); }
+
+.zone__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+.zone__col { display: flex; flex-direction: column; gap: 6px; }
+.zone__block { display: grid; grid-template-columns: repeat(7, auto); justify-content: center; gap: 8px 4px; }
+
+.seat {
+  width: clamp(26px, 5.4vw, 40px);
+  height: clamp(26px, 5.4vw, 40px);
+  padding: 0;
+  border: 2px solid var(--color-text);
+  border-radius: 6px;
+  background: var(--color-white);
+  color: var(--color-text);
+  font-size: clamp(0.55rem, 1.4vw, 0.75rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+.seat:hover:not(:disabled) { transform: scale(1.08); }
+
+/* Seleccionado: verde + borde grueso (no depende solo del color) */
+.seat--selected { background: var(--color-success); border-width: 3px; }
+
+/* No disponible: gris + tachado */
+.seat--taken {
+  background: var(--color-border);
+  border-color: var(--color-border);
+  color: #fff;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.seat-legend { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; padding: 0; list-style: none; font-size: 0.875rem; font-weight: 700; }
+.seat-legend li { display: flex; align-items: center; gap: 8px; }
+.seat-legend__box { width: 22px; height: 22px; border-radius: 4px; border: 2px solid var(--color-text); }
+.seat-legend__box--available { background: var(--color-white); }
+.seat-legend__box--selected { background: var(--color-success); border-width: 3px; }
+.seat-legend__box--taken { background: var(--color-border); border-color: var(--color-border); }

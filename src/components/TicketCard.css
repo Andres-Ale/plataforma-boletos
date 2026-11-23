@@ -1,0 +1,34 @@
+.ticket {
+  max-width: 620px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.ticket__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 10px var(--space-3);
+  border-bottom: 2px solid var(--color-primary);
+  background: var(--color-white);
+}
+.ticket__head svg { flex: none; color: var(--color-accent); }
+.ticket__head h3 { flex: 1; font-size: 0.875rem; text-align: center; }
+
+.ticket__body { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-4); }
+.ticket__info { flex: 1 1 260px; margin: 0; display: grid; gap: var(--space-2); font-size: 0.9375rem; }
+.ticket__info div { display: flex; flex-wrap: wrap; gap: 6px; }
+.ticket__info dt { font-weight: 700; }
+.ticket__info dd { margin: 0; }
+
+.ticket__qr { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-inline: auto; font-size: 0.8125rem; font-weight: 700; }
+.ticket__qr [role='img'] { padding: 8px; background: #fff; border-radius: 8px; }
+
+@media print {
+  body * { visibility: hidden; }
+  .ticket, .ticket * { visibility: visible; }
+  .ticket { position: absolute; left: 0; top: 0; width: 100%; max-width: none; border: 1px solid #000; }
+}
