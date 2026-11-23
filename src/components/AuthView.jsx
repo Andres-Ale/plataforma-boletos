@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
-import { loginUser, registerUser } from "../services/auth";
+import { DEMO_ACCOUNTS, DEMO_PASSWORD, loginUser, registerUser, requestPasswordReset } from "../services/auth";
 import "./AuthSection.css";
 
 export default function AuthView({
@@ -8,7 +8,7 @@ export default function AuthView({
   onAuthSuccess,
   onNavigate,
 }) {
-  const [mode, setMode] = useState(initialMode); // "login" | "register"
+  const [mode, setMode] = useState(initialMode); // "login" | "register" | "recover"
 
   // Estados Login
   const [loginEmail, setLoginEmail] = useState("");
@@ -23,6 +23,17 @@ export default function AuthView({
   const [regConfirmPassword, setRegConfirmPassword] = useState("");
   const [showRegPass, setShowRegPass] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+
+  // Recuperación de contraseña (simulada)
+  const [recoverEmail, setRecoverEmail] = useState("");
+  const [recoverStatus, setRecoverStatus] = useState("idle"); // "idle" | "sending"
+  const mountedRef = useRef(true);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   // Feedback
   const [feedback, setFeedback] = useState(null); // { type: "error" | "success", text: string }
@@ -92,10 +103,26 @@ export default function AuthView({
     if (onAuthSuccess) onAuthSuccess(result.user);
   };
 
+  const handleRecoverSubmit = async (e) => {
+    e.preventDefault();
+    if (recoverStatus === "sending") return; // evita doble envío
+    setFeedback(null);
+    setRecoverStatus("sending");
+    const result = await requestPasswordReset(recoverEmail);
+    if (!mountedRef.current) return;
+    setRecoverStatus("idle");
+    setFeedback(
+      result.ok
+        ? { type: "success", text: `Si ${recoverEmail.trim()} está registrado, recibirás instrucciones para restablecer tu contraseña. (Simulación: no se envía ningún correo real.)` }
+        : { type: "error", text: result.error }
+    );
+  };
+
+  // Inicio de sesión social simulado: entra con la primera cuenta de demostración
   const handleDemoGoogle = () => {
     const result = loginUser({
-      email: "luis.pacheco@easyticket.com",
-      password: "Password123!",
+      email: DEMO_ACCOUNTS[0].email,
+      password: DEMO_PASSWORD,
       remember: true,
     });
     if (result.ok && onAuthSuccess) {
@@ -204,12 +231,7 @@ export default function AuthView({
                   <button
                     type="button"
                     className="auth-link-btn"
-                    onClick={() =>
-                      setFeedback({
-                        type: "error",
-                        text: "Cuenta demo disponible: luis.pacheco@easyticket.com / Password123!",
-                      })
-                    }
+                    onClick={() => switchMode("recover")}
                   >
                     ¿Olvidaste tu contraseña?
                   </button>
@@ -224,7 +246,7 @@ export default function AuthView({
                   className="btn-google"
                   onClick={handleDemoGoogle}
                 >
-                  Continuar con Google
+                  Continuar con Google (demo)
                 </button>
               </form>
 
@@ -236,6 +258,59 @@ export default function AuthView({
                   onClick={() => switchMode("register")}
                 >
                   Regístrate
+                </button>
+              </p>
+
+              <details className="auth-demo">
+                <summary>Cuentas de prueba</summary>
+                <ul>
+                  {DEMO_ACCOUNTS.map((account) => (
+                    <li key={account.email}>
+                      {account.email} · {account.role}
+                    </li>
+                  ))}
+                  <li>Contraseña de todas: {DEMO_PASSWORD}</li>
+                </ul>
+              </details>
+            </>
+          ) : mode === "recover" ? (
+            <>
+              <div className="auth-card-header">
+                <h2>Recupera tu contraseña</h2>
+                <p>Ingresa tu correo y te enviaremos instrucciones</p>
+              </div>
+
+              {feedback && (
+                <div className={`auth-alert auth-alert--${feedback.type}`} role="alert">
+                  {feedback.text}
+                </div>
+              )}
+
+              <form onSubmit={handleRecoverSubmit} className="auth-form" noValidate>
+                <div className="auth-field">
+                  <label htmlFor="recover-email" className="sr-only">
+                    Correo electrónico
+                  </label>
+                  <input
+                    id="recover-email"
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={recoverEmail}
+                    onChange={(e) => setRecoverEmail(e.target.value)}
+                    disabled={recoverStatus === "sending"}
+                    required
+                  />
+                </div>
+
+                <button type="submit" className="btn-orange auth-submit" disabled={recoverStatus === "sending"}>
+                  {recoverStatus === "sending" ? "Enviando..." : "Enviar instrucciones →"}
+                </button>
+              </form>
+
+              <p className="auth-switch-text">
+                ¿Ya la recordaste?{" "}
+                <button type="button" className="auth-link-inline" onClick={() => switchMode("login")}>
+                  Volver a iniciar sesión
                 </button>
               </p>
             </>
@@ -366,31 +441,6 @@ export default function AuthView({
       </div>
 
       {/* Franja inferior de beneficios y footer institucional */}
-      <div className="auth-perks-strip">
-        <div className="container auth-perks-grid">
-          <div className="auth-perk">
-            <strong>Compra segura</strong>
-            <span>Tus datos y pagos son protegidos</span>
-          </div>
-          <div className="auth-perk">
-            <strong>Proceso rápido</strong>
-            <span>Tu entrada en pocos clics</span>
-          </div>
-          <div className="auth-perk">
-            <strong>Vive la experiencia</strong>
-            <span>Eventos de todo tipo para todos los gustos</span>
-          </div>
-        </div>
-      </div>
-
-      <footer className="auth-footer">
-        <div className="container auth-footer-inner">
-          <p>
-            © 2026 Easy Ticket | Proyecto POU. Todos los derechos reservados.
-            Universidad Centroamericana José Simeón Cañas
-          </p>
-        </div>
-      </footer>
     </section>
   );
 }

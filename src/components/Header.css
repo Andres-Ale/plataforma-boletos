@@ -119,6 +119,7 @@
 
 @media (max-width: 479px) {
   .user-menu__name { display: none; }
+  .header__register { display: none; } /* en móvil no cabe junto a "Iniciar sesión"; el registro está en esa pantalla */
 }
 
 @media (min-width: 768px) {
@@ -128,4 +129,11 @@
   .header__link { width: auto; padding: 8px 4px; font-size: 1.0625rem; }
   .header__actions { order: 2; margin-left: 0; }
   .user-menu__btn { font-size: 0.875rem; }
+}
+
+/* Tablet (768–1023 px): sin sesión, el menú + los dos botones no cabían en una fila y el header se partía en dos */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header__nav ul { gap: var(--space-3); }
+  .header__link { font-size: 0.9375rem; }
+  .header__actions { gap: var(--space-1, 4px); }
 }

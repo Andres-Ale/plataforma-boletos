@@ -114,7 +114,7 @@ function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClic
             </>
           ) : (
             <>
-              <Button variant="outline" size="sm" onClick={() => go('register')}>
+              <Button variant="outline" size="sm" className="header__register" onClick={() => go('register')}>
                 Crear cuenta
               </Button>
               <Button variant="outline" size="sm" onClick={() => go('login')}>

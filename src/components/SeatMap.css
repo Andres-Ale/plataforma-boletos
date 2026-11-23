@@ -72,3 +72,27 @@
 .seat-legend__box--available { background: var(--color-white); }
 .seat-legend__box--selected { background: var(--color-success); border-width: 3px; }
 .seat-legend__box--taken { background: var(--color-border); border-color: var(--color-border); }
+
+/* Móvil (< 480 px): los palcos laterales dejaban a Diamante sin ancho y sus asientos se salían del recuadro.
+   Se apilan las zonas: V.I.P., Diamante, Palco A + Palco B lado a lado y Palco C. */
+@media (max-width: 479px) {
+  .seat-map__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      'vip vip'
+      'dia dia'
+      'pa pb'
+      'pc pc';
+  }
+
+  .seat { width: 32px; height: 32px; font-size: 0.6875rem; }
+
+  .zone--pa, .zone--pb { flex-direction: column; justify-content: center; gap: 6px; }
+  .zone--pb .zone__title { order: -1; }
+  .zone--pa .zone__col, .zone--pb .zone__col { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; }
+  .zone__title--vertical { writing-mode: horizontal-tb; }
+  .zone__title--flip { transform: none; }
+
+  .zone__block { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+  .zone__block .seat { justify-self: center; }
+}
