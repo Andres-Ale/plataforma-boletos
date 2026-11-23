@@ -1,26 +1,13 @@
-import Button from '../components/Button'
-import { USERS } from '../data/users'
+import AuthView from '../components/AuthView'
 
-// PANTALLA PROVISIONAL (persona B la reemplaza por el diseño de Login/Registro).
-// Contrato que debe respetar la versión final:
-//   props: onLogin(user)  → App guarda la sesión y vuelve a donde el usuario iba.
-function LoginPage({ onLogin, onNavigate }) {
-  return (
-    <div className="page container login-placeholder">
-      <h1 className="page__title">Iniciar sesión</h1>
-      <p>Pantalla provisional: elige un usuario de prueba para continuar.</p>
-      <ul className="login-placeholder__list">
-        {USERS.map((user) => (
-          <li key={user.id}>
-            <Button block onClick={() => onLogin(user)}>
-              Entrar como {user.name} ({user.role})
-            </Button>
-          </li>
-        ))}
-      </ul>
-      <Button variant="outline" size="sm" onClick={() => onNavigate('events')}>Volver a eventos</Button>
-    </div>
-  )
+// Login y registro (diseño de Figma). AuthView guarda la cuenta en localStorage
+// y avisa con onAuthSuccess(user); App guarda la sesión y vuelve a donde iba el usuario.
+//   props: initialMode ('login' | 'register'), onLogin(user), onNavigate(vista)
+function LoginPage({ initialMode = 'login', onLogin, onNavigate }) {
+  // AuthView pide volver a "home"; en esta app esa vista se llama "events"
+  const handleNavigate = (view) => onNavigate(view === 'home' ? 'events' : view)
+
+  return <AuthView key={initialMode} initialMode={initialMode} onAuthSuccess={onLogin} onNavigate={handleNavigate} />
 }
 
 export default LoginPage

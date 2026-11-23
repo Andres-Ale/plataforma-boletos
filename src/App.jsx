@@ -11,14 +11,16 @@ import ConfirmationPage from './pages/ConfirmationPage'
 import MyTicketsPage from './pages/MyTicketsPage'
 import HelpPage from './pages/HelpPage'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from './pages/ProfilePage'
 import useAsync from './hooks/useAsync'
 import useLocalStorage from './hooks/useLocalStorage'
 import { fetchEvents } from './utils/fakeApi'
 import { buildOrder } from './utils/orders'
+import { logoutUser } from './services/auth'
 import { getEventStatus, getTakenSeats } from './utils/seats'
 
 // Vistas que exigen sesión iniciada
-const PROTECTED_VIEWS = ['seats', 'payment', 'confirmation', 'tickets']
+const PROTECTED_VIEWS = ['seats', 'payment', 'confirmation', 'tickets', 'profile']
 // Vistas que necesitan los eventos ya cargados
 const NEEDS_EVENTS = ['detail', 'seats', 'payment', 'confirmation', 'tickets']
 
@@ -33,6 +35,8 @@ const TITLES = {
   tickets: 'Mis boletos',
   help: 'Ayuda',
   login: 'Iniciar sesión',
+  register: 'Crear cuenta',
+  profile: 'Mi perfil',
 }
 
 function App() {
@@ -74,9 +78,16 @@ function App() {
   }
 
   const handleLogout = () => {
+    logoutUser()
     setUser(null)
     setCart(EMPTY_CART)
     setView({ name: 'events', params: {} })
+  }
+
+  // ProfileView avisa con el usuario actualizado, o con null si cerró sesión
+  const handleUserChange = (updated) => {
+    if (updated) setUser((prev) => ({ ...prev, ...updated }))
+    else handleLogout()
   }
 
   // ---- Carrito: un solo evento a la vez; los totales se derivan ----
@@ -119,7 +130,10 @@ function App() {
       )
     }
     if (name === 'help') return <HelpPage />
-    if (name === 'login') return <LoginPage onLogin={handleLogin} onNavigate={navigate} />
+    if (name === 'login' || name === 'register') {
+      return <LoginPage initialMode={name} onLogin={handleLogin} onNavigate={navigate} />
+    }
+    if (name === 'profile') return <ProfilePage user={user} onUserChange={handleUserChange} onNavigate={navigate} />
 
     if (NEEDS_EVENTS.includes(name)) {
       if (status === 'loading') return <div className="container"><LoadingState message="Cargando..." /></div>

@@ -2,7 +2,7 @@ import { ALL_SEATS } from '../utils/seats'
 
 // Fuente única de verdad: listado, detalle, mapa, carrito, boleto y panel admin
 // leen de aquí. Los afiches van en public/images/events/<id>.jpg
-const poster = (id) => `/images/events/${id}.jpg`
+const poster = (id) => `/images/events/${id}.png`
 
 export const EVENTS = [
   {

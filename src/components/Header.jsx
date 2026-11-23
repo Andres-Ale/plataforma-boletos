@@ -96,6 +96,7 @@ function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClic
                 {userMenuOpen && (
                   <ul className="user-menu__list">
                     <li><button type="button" onClick={() => go('tickets')}>Mis boletos</button></li>
+                    <li><button type="button" onClick={() => go('profile')}>Mi perfil</button></li>
                     {canManage && <li><button type="button" onClick={() => go('admin')}>Panel de administración</button></li>}
                     <li>
                       <button type="button" onClick={() => { setUserMenuOpen(false); setMenuOpen(false); onLogout() }}>
@@ -112,10 +113,15 @@ function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClic
               </button>
             </>
           ) : (
-            <Button variant="outline" size="sm" onClick={() => go('login')}>
-              <Icon name="user" size={16} />
-              Iniciar sesión
-            </Button>
+            <>
+              <Button variant="outline" size="sm" onClick={() => go('register')}>
+                Crear cuenta
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => go('login')}>
+                <Icon name="user" size={16} />
+                Iniciar sesión
+              </Button>
+            </>
           )}
         </div>
       </div>
