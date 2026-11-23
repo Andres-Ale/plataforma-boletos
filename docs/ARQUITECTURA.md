@@ -30,6 +30,7 @@ flowchart LR
   D -. sin sesión .-> L
   L -- onLogin + next --> C
   H[Header] --> P[profile] & F & A
+  H -- rol administrador u organizador --> AD[admin]
 ```
 
 Al cambiar de vista, un `useEffect` en `App` sube al inicio de la página, mueve el foco al contenido principal y actualiza el título de la pestaña.
@@ -57,6 +58,7 @@ Al cambiar de vista, un `useEffect` en `App` sube al inicio de la página, mueve
 | `ConfirmationPage` | `mailStatus` (envío simulado del boleto) |
 | `AuthView` | modo (`login`/`register`/`recover`), campos de cada formulario, `feedback` |
 | `ProfileView` | campos editables y mensaje de estado |
+| `AdminPage` | pestaña activa, filtros de categoría, estado y rol. Recibe `user`, `events` y `orders` por props; las métricas se derivan con `useMemo` |
 
 ### Valores derivados (no se guardan)
 
@@ -88,6 +90,10 @@ El cierre de sesión limpia `easyticket_session` y `et_user`, y vacía el carrit
 3. Con datos válidos llama a `processPayment` (retardo de 1.8 s; una tarjeta terminada en `0000` simula un rechazo). El botón queda bloqueado mientras procesa y un `ref` evita el doble envío.
 4. Si el pago pasa, `App.handlePaid` **vuelve a validar** que ningún asiento haya sido vendido mientras tanto, crea la orden con `buildOrder`, la agrega a `orders`, vacía el carrito y navega a `confirmation`.
 5. `ConfirmationPage` y `MyTicketsPage` muestran la orden con `TicketCard` (QR generado en el cliente con `qrcode.react`).
+
+   ### Panel de administración y reportes (módulos 7 y 8)
+
+`AdminPage` solo se muestra si `user.role` es `administrador` u `organizador`; con rol de cliente muestra un aviso de acceso restringido. Tiene tres pestañas (`role="tablist"`): **Reportes** (ingresos y ocupación por evento, ventas por categoría y periodo, rendimiento por zona), **Inventario** (eventos con zonas, precios y disponibilidad, filtrables) y **Usuarios** (directorio con roles). Los indicadores y gráficos son valores derivados de `events` + `orders` mediante `useMemo`; no se guardan. Los usuarios se leen de `services/auth.js`.
 
 ## 5. Efectos y limpieza
 
