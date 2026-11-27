@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { assetUrl } from '../api/client'
 
 // Muestra /public/images/logo.png; si todavía no existe, cae a texto.
 function Logo({ height = 44 }) {
@@ -10,7 +11,7 @@ function Logo({ height = 44 }) {
 
   return (
     <img
-      src="/images/logo.png"
+      src={assetUrl('images/logo.png')}
       alt="Easy Ticket"
       style={{ height, width: 'auto' }}
       onError={() => setFailed(true)}

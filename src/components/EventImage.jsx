@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { assetUrl } from '../api/client'
 
 // Afiche del evento. Si la imagen no existe, muestra un recuadro con el título.
 function EventImage({ event, className = '' }) {
@@ -15,7 +16,7 @@ function EventImage({ event, className = '' }) {
   return (
     <img
       className={`event-image ${className}`}
-      src={event.image}
+      src={assetUrl(event.image)}
       alt={`Afiche de ${event.title}`}
       loading="lazy"
       onError={() => setFailed(true)}

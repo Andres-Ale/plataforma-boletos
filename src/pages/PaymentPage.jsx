@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
 import Input from '../components/Input'
@@ -6,7 +7,11 @@ import OrderSummary from '../components/OrderSummary'
 import PaymentMethodSelector from '../components/PaymentMethodSelector'
 import StepIndicator from '../components/StepIndicator'
 import { EmptyState, ErrorMessage } from '../components/StatusViews'
-import { processPayment } from '../utils/fakeApi'
+import { isAbortError } from '../api/client'
+import { processPayment } from '../api/payments'
+import { useAuth } from '../context/contexts'
+import { useCart } from '../context/contexts'
+import { useCatalog } from '../context/contexts'
 import { formatPrice } from '../utils/format'
 import { getSeatsTotal } from '../utils/seats'
 import { formatCardNumber, formatExpiry, getCardBrand, validateCard } from '../utils/validation'
@@ -14,10 +19,20 @@ import { formatCardNumber, formatExpiry, getCardBrand, validateCard } from '../u
 const FIELD_ORDER = ['name', 'number', 'expiry', 'cvc']
 const FIELD_IDS = { name: 'card-name', number: 'card-number', expiry: 'card-expiry', cvc: 'card-cvc' }
 
-// onPaid(method) devuelve { ok: true } o { ok: false, message }
-function PaymentPage({ event, seats, user, onBack, onGoEvents, onPaid }) {
+// Checkout (paso 3): pago simulado. El carrito y la sesión vienen de los contextos globales.
+function PaymentPage() {
+  const { user } = useAuth()
+  const { cart, clear } = useCart()
+  const { events, placeOrder } = useCatalog()
+  const navigate = useNavigate()
+
+  const seats = cart.seats
+  const event = events.find((e) => e.id === cart.eventId)
+  const onBack = () => navigate('/carrito')
+  const onGoEvents = () => navigate('/eventos')
+
   const [method, setMethod] = useState('card')
-  const [form, setForm] = useState({ name: user.name, number: '', expiry: '', cvc: '' })
+  const [form, setForm] = useState({ name: user?.name ?? '', number: '', expiry: '', cvc: '' })
   const [saveCard, setSaveCard] = useState(false)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | processing | error
@@ -25,15 +40,20 @@ function PaymentPage({ event, seats, user, onBack, onGoEvents, onPaid }) {
 
   const submittingRef = useRef(false) // evita doble envío aunque se pulse muy rápido
   const mountedRef = useRef(true)
+  const controllerRef = useRef(null) // cancela el pago en curso si el usuario sale de la pantalla
 
   useEffect(() => {
     mountedRef.current = true
     return () => {
       mountedRef.current = false
+      controllerRef.current?.abort()
     }
   }, [])
 
-  if (seats.length === 0) {
+  // El checkout es público en la tabla de rutas, pero pagar exige sesión: se envía al login y se vuelve aquí
+  if (!user) return <Navigate to="/login" replace state={{ from: '/checkout' }} />
+
+  if (!event || seats.length === 0) {
     return (
       <div className="page container">
         <EmptyState
@@ -72,16 +92,17 @@ function PaymentPage({ event, seats, user, onBack, onGoEvents, onPaid }) {
     setStatus('processing')
     setErrorMessage('')
 
+    const controller = new AbortController()
+    controllerRef.current = controller
+
     try {
-      await processPayment({ method, cardNumber: form.number })
-      if (!mountedRef.current) return
-      const result = onPaid(method)
-      if (!result.ok) {
-        setStatus('error')
-        setErrorMessage(result.message)
-      }
+      await processPayment({ method, cardNumber: form.number }, { signal: controller.signal })
+      // La API revalida la disponibilidad y crea la orden (sin datos de tarjeta)
+      const order = await placeOrder({ eventId: event.id, seats, user, method }, { signal: controller.signal })
+      clear()
+      navigate(`/confirmacion/${order.id}`, { replace: true })
     } catch (err) {
-      if (!mountedRef.current) return
+      if (isAbortError(err) || !mountedRef.current) return
       setStatus('error')
       setErrorMessage(err.message)
     } finally {

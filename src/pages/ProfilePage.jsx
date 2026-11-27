@@ -1,11 +1,22 @@
+import { useNavigate } from 'react-router'
 import ProfileView from '../components/ProfileView'
+import { useAuth } from '../context/contexts'
+import useLogout from '../context/useLogout'
 
-// Perfil de usuario. ProfileView edita nombre y correo en localStorage.
-//   props: user (sesión actual), onUserChange(user | null), onNavigate(vista)
-function ProfilePage({ user, onUserChange, onNavigate }) {
-  const handleNavigate = (view) => onNavigate(view === 'home' ? 'events' : view)
+// Perfil de usuario (ruta protegida): edita nombre y correo contra la API falsa.
+function ProfilePage() {
+  const { user, updateProfile } = useAuth()
+  const logout = useLogout()
+  const navigate = useNavigate()
 
-  return <ProfileView session={user} onSessionChange={onUserChange} onNavigate={handleNavigate} />
+  return (
+    <ProfileView
+      session={user}
+      onSave={(data) => updateProfile(user.id, data)}
+      onLogout={logout}
+      onNavigate={(view) => navigate(view === 'home' ? '/eventos' : `/${view}`)}
+    />
+  )
 }
 
 export default ProfilePage

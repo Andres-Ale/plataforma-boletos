@@ -1,11 +1,32 @@
+import { useNavigate, useParams } from 'react-router'
 import Button from '../components/Button'
+import { EmptyState } from '../components/StatusViews'
+import { useCatalog } from '../context/contexts'
+import { getEventStatus } from '../utils/seats'
 import Icon from '../components/Icon'
 import EventImage from '../components/EventImage'
 import ZoneLegend from '../components/ZoneLegend'
 import StepIndicator from '../components/StepIndicator'
 import { formatLongDate } from '../utils/format'
 
-function EventDetailPage({ event, status, onBack, onSelectSeats }) {
+function EventDetailPage() {
+  const { id } = useParams()
+  const { events, orders } = useCatalog()
+  const navigate = useNavigate()
+  const event = events.find((e) => e.id === id)
+
+  if (!event) {
+    return (
+      <div className="page container">
+        <EmptyState title="Evento no encontrado" text="Puede que haya sido eliminado." actionLabel="Ver eventos" onAction={() => navigate('/eventos')} />
+      </div>
+    )
+  }
+
+  const status = getEventStatus(event, orders)
+  const onBack = () => navigate('/eventos')
+  const onSelectSeats = () => navigate(`/eventos/${event.id}/asientos`)
+
   return (
     <div className="page container">
       <Button variant="outline" size="sm" onClick={onBack}>

@@ -1,30 +1,34 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 import SearchBar from '../components/SearchBar'
 import CategoryTabs from '../components/CategoryTabs'
 import EventCard from '../components/EventCard'
 import { EmptyState, ErrorMessage, LoadingState } from '../components/StatusViews'
 import { formatMonthLabel, normalizeText } from '../utils/format'
+import { useCatalog } from '../context/contexts'
 import { getEventStatus } from '../utils/seats'
 
 const EMPTY_FILTERS = { query: '', month: '', venue: '', category: '' }
 
-function EventsPage({ events, status, error, onRetry, orders, onSelectEvent, scrollTo }) {
+function EventsPage() {
+  const { events, orders, status, error, reload: onRetry } = useCatalog()
+  const navigate = useNavigate()
+  const scrollTo = useLocation().hash.replace('#', '') // /eventos#categorias
+  const onSelectEvent = (id) => navigate(`/eventos/${id}`)
   const [filters, setFilters] = useState(EMPTY_FILTERS)
 
   const updateFilter = (field, value) => setFilters((prev) => ({ ...prev, [field]: value }))
 
   // Valores derivados de los datos (no se guardan en estado)
-  const categories = useMemo(() => (events ? [...new Set(events.map((e) => e.category))] : []), [events])
-  const venues = useMemo(() => (events ? [...new Set(events.map((e) => e.venue))].sort() : []), [events])
+  const categories = useMemo(() => [...new Set(events.map((e) => e.category))], [events])
+  const venues = useMemo(() => [...new Set(events.map((e) => e.venue))].sort(), [events])
   const months = useMemo(() => {
-    if (!events) return []
     return [...new Set(events.map((e) => e.date.slice(0, 7)))]
       .sort()
       .map((value) => ({ value, label: formatMonthLabel(value) }))
   }, [events])
 
   const filtered = useMemo(() => {
-    if (!events) return []
     const query = normalizeText(filters.query.trim())
     return events.filter((e) => {
       const matchesQuery = !query || normalizeText(`${e.title} ${e.subtitle}`).includes(query)

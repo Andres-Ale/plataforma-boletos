@@ -137,3 +137,21 @@
   .header__link { font-size: 0.9375rem; }
   .header__actions { gap: var(--space-1, 4px); }
 }
+
+/* Enlaces de React Router (Link / NavLink) con el aspecto de los antiguos botones */
+a.header__link { display: block; box-sizing: border-box; text-decoration: none; }
+a.header__logo { text-decoration: none; }
+.user-menu__list a {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: inherit;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none;
+}
+.user-menu__list a:hover { background: var(--color-bg); }
+a.cart-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+a.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; box-sizing: border-box; }

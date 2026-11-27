@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { logoutUser, updateUserProfile } from "../services/auth";
 import "./AuthSection.css";
 
-export default function ProfileView({ session, onSessionChange, onNavigate }) {
+// onSave(data) guarda el perfil contra la API falsa (lanza un error si falla); onLogout cierra la sesión
+export default function ProfileView({ session, onSave, onLogout, onNavigate }) {
   const [name, setName] = useState(session?.name || "");
   const [email, setEmail] = useState(session?.email || "");
   const [statusMsg, setStatusMsg] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   if (!session) {
     return (
@@ -29,21 +30,23 @@ export default function ProfileView({ session, onSessionChange, onNavigate }) {
     );
   }
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
+    if (saving) return; // evita el doble envío
     setStatusMsg(null);
-    const res = updateUserProfile(session.id, { name, email });
-    if (!res.ok) {
-      setStatusMsg({ type: "error", text: res.error });
-      return;
+    setSaving(true);
+    try {
+      await onSave({ name, email });
+      setStatusMsg({ type: "success", text: "Perfil actualizado." });
+    } catch (err) {
+      setStatusMsg({ type: "error", text: err.message });
+    } finally {
+      setSaving(false);
     }
-    setStatusMsg({ type: "success", text: "Perfil actualizado." });
-    if (onSessionChange) onSessionChange(res.user);
   };
 
   const handleLogout = () => {
-    logoutUser();
-    if (onSessionChange) onSessionChange(null);
+    if (onLogout) onLogout();
     if (onNavigate) onNavigate("login");
   };
 
@@ -98,8 +101,8 @@ export default function ProfileView({ session, onSessionChange, onNavigate }) {
               />
             </div>
 
-            <button type="submit" className="btn-orange auth-submit">
-              Guardar cambios
+            <button type="submit" className="btn-orange auth-submit" disabled={saving}>
+              {saving ? "Guardando..." : "Guardar cambios"}
             </button>
           </form>
 

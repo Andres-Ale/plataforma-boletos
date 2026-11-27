@@ -1,10 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
 import TicketCard from '../components/TicketCard'
 import { EmptyState } from '../components/StatusViews'
+import { useCatalog } from '../context/contexts'
 
-function ConfirmationPage({ order, event, onViewTickets, onGoEvents }) {
+function ConfirmationPage() {
+  const { orderId } = useParams()
+  const { orders, events } = useCatalog()
+  const navigate = useNavigate()
+  const order = orders.find((o) => o.id === orderId)
+  const event = order && events.find((e) => e.id === order.eventId)
+  const onViewTickets = () => navigate('/boletos')
+  const onGoEvents = () => navigate('/eventos')
   const [mailStatus, setMailStatus] = useState('idle') // idle | sending | sent
   const timerRef = useRef(null)
 

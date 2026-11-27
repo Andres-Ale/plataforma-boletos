@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router'
 import Logo from './Logo'
 import Icon from './Icon'
 import Button from './Button'
+import { useAuth } from '../context/contexts'
+import { useCart } from '../context/contexts'
+import useLogout from '../context/useLogout'
 import './Header.css'
 
-const NAV = [
-  { label: 'Inicio', view: 'events' },
-  { label: 'Eventos', view: 'events', scrollTo: 'eventos' },
-  { label: 'Categorías', view: 'events', scrollTo: 'categorias' },
-  { label: 'Ayuda', view: 'help' },
-]
+function Header({ onCartClick }) {
+  const { user } = useAuth()
+  const { count: cartCount } = useCart()
+  const logout = useLogout()
+  const location = useLocation()
 
-function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClick }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const userMenuRef = useRef(null)
@@ -35,20 +37,20 @@ function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClic
     }
   }, [userMenuOpen])
 
-  const go = (view, params = {}) => {
+  const closeMenus = () => {
     setMenuOpen(false)
     setUserMenuOpen(false)
-    onNavigate(view, params)
   }
 
   const canManage = user && (user.role === 'administrador' || user.role === 'organizador')
+  const authState = { from: location.pathname }
 
   return (
     <header className="header">
       <div className="header__inner">
-        <button type="button" className="header__logo" onClick={() => go('events')} aria-label="Easy Ticket, ir al inicio">
+        <Link to="/" className="header__logo" onClick={closeMenus} aria-label="Easy Ticket, ir al inicio">
           <Logo />
-        </button>
+        </Link>
 
         <button
           type="button"
@@ -63,66 +65,64 @@ function Header({ user, cartCount, currentView, onNavigate, onLogout, onCartClic
 
         <nav id="main-nav" className={`header__nav ${menuOpen ? 'is-open' : ''}`} aria-label="Principal">
           <ul>
-            {NAV.map((item) => (
-              <li key={item.label}>
-                <button
-                  type="button"
-                  className="header__link"
-                  aria-current={item.view === currentView && !item.scrollTo ? 'page' : undefined}
-                  onClick={() => go(item.view, item.scrollTo ? { scrollTo: item.scrollTo } : {})}
-                >
-                  {item.label}
-                </button>
-              </li>
-            ))}
+            <li>
+              <NavLink to="/" end className="header__link" onClick={closeMenus}>Inicio</NavLink>
+            </li>
+            <li>
+              <NavLink to="/eventos" className="header__link" onClick={closeMenus}>Eventos</NavLink>
+            </li>
+            <li>
+              <Link to="/eventos#categorias" className="header__link" onClick={closeMenus}>Categorías</Link>
+            </li>
+            <li>
+              <NavLink to="/ayuda" className="header__link" onClick={closeMenus}>Ayuda</NavLink>
+            </li>
           </ul>
         </nav>
 
         <div className="header__actions">
           {user ? (
-            <>
-              <div className="user-menu" ref={userMenuRef}>
-                <button
-                  type="button"
-                  className="user-menu__btn"
-                  aria-expanded={userMenuOpen}
-                  aria-label={`Menú de ${user.name}`}
-                  onClick={() => setUserMenuOpen((open) => !open)}
-                >
-                  <Icon name="user" size={16} />
-                  <span className="user-menu__name">{user.name}</span>
-                  <Icon name="chevronDown" size={14} />
-                </button>
-                {userMenuOpen && (
-                  <ul className="user-menu__list">
-                    <li><button type="button" onClick={() => go('tickets')}>Mis boletos</button></li>
-                    <li><button type="button" onClick={() => go('profile')}>Mi perfil</button></li>
-                    {canManage && <li><button type="button" onClick={() => go('admin')}>Panel de administración</button></li>}
-                    <li>
-                      <button type="button" onClick={() => { setUserMenuOpen(false); setMenuOpen(false); onLogout() }}>
-                        Cerrar sesión
-                      </button>
-                    </li>
-                  </ul>
-                )}
-              </div>
-
-              <button type="button" className="cart-btn" onClick={onCartClick} aria-label={`Carrito, ${cartCount} asientos`}>
-                <Icon name="cart" size={20} />
-                {cartCount > 0 && <span className="cart-btn__badge" aria-hidden="true">{cartCount}</span>}
+            <div className="user-menu" ref={userMenuRef}>
+              <button
+                type="button"
+                className="user-menu__btn"
+                aria-expanded={userMenuOpen}
+                aria-label={`Menú de ${user.name}`}
+                onClick={() => setUserMenuOpen((open) => !open)}
+              >
+                <Icon name="user" size={16} />
+                <span className="user-menu__name">{user.name}</span>
+                <Icon name="chevronDown" size={14} />
               </button>
-            </>
+              {userMenuOpen && (
+                <ul className="user-menu__list">
+                  <li><Link to="/boletos" onClick={closeMenus}>Mis boletos</Link></li>
+                  <li><Link to="/perfil" onClick={closeMenus}>Mi perfil</Link></li>
+                  {canManage && <li><Link to="/admin" onClick={closeMenus}>Panel de administración</Link></li>}
+                  <li>
+                    <button type="button" onClick={() => { closeMenus(); logout() }}>
+                      Cerrar sesión
+                    </button>
+                  </li>
+                </ul>
+              )}
+            </div>
           ) : (
             <>
-              <Button variant="outline" size="sm" className="header__register" onClick={() => go('register')}>
+              <Button as={Link} to="/registro" state={authState} variant="outline" size="sm" className="header__register">
                 Crear cuenta
               </Button>
-              <Button variant="outline" size="sm" onClick={() => go('login')}>
+              <Button as={Link} to="/login" state={authState} variant="outline" size="sm">
                 <Icon name="user" size={16} />
                 Iniciar sesión
               </Button>
             </>
           )}
+
+          <button type="button" className="cart-btn" onClick={onCartClick} aria-label={`Carrito, ${cartCount} asientos`}>
+            <Icon name="cart" size={20} />
+            {cartCount > 0 && <span className="cart-btn__badge" aria-hidden="true">{cartCount}</span>}
+          </button>
         </div>
       </div>
     </header>

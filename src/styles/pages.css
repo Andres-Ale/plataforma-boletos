@@ -101,3 +101,44 @@
 @media print {
   .header, .footer, .skip-link { display: none !important; }
 }
+
+/* ---- Tercera entrega: inicio, carrito, verificación, 404 ---- */
+.home__title { margin: var(--space-4) 0 var(--space-3); font-size: 1.5rem; }
+.home__more { margin-top: var(--space-4); text-align: center; }
+
+.cart-page__event { margin: 0 0 var(--space-3); color: #cbd5e1; }
+.cart-lines { display: grid; gap: var(--space-2); margin: 0 0 var(--space-4); padding: 0; list-style: none; }
+.cart-lines li {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-white); color: var(--color-text); border: 1px solid var(--color-line); border-radius: var(--radius);
+}
+.cart-lines__price { margin-left: auto; font-weight: 700; }
+.cart-lines button {
+  display: inline-flex; padding: 8px; border: 0; border-radius: 8px;
+  background: none; color: var(--color-error); cursor: pointer;
+}
+.cart-lines button:hover { background: var(--color-bg); }
+.cart-page__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: flex-end; margin-top: var(--space-4); }
+
+.status-view__code { margin: 0; font-size: 4rem; font-weight: 800; color: var(--color-accent); line-height: 1; }
+
+.verify { max-width: 640px; }
+.verify__card {
+  display: grid; gap: var(--space-2); justify-items: start;
+  padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--color-white); color: var(--color-text); border: 2px solid var(--color-line);
+}
+.verify__card a:not(.btn) { color: #0b5cad; }
+.verify__card h2 { margin: 0; }
+.verify__card--valid { border-color: var(--color-success); }
+.verify__card--valid > svg { color: var(--color-success); }
+.verify__card--warn { border-color: var(--color-warning); }
+.verify__card--invalid { border-color: var(--color-error); }
+.verify__card--invalid > svg { color: var(--color-error); }
+.verify__list { display: grid; gap: 6px; width: 100%; margin: 0; }
+.verify__list div { display: flex; flex-wrap: wrap; gap: 6px; }
+.verify__list dt { font-weight: 700; }
+.verify__list dd { margin: 0; }
+
+.ticket__verify { display: block; margin-top: 4px; font-size: 0.8125rem; font-weight: 600; }

@@ -1,0 +1,30 @@
+.pwa-offline {
+  padding: 8px var(--space-3);
+  background: #b45309;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pwa-toast {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 80;
+  display: grid;
+  gap: var(--space-2);
+  max-width: 340px;
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  color: var(--color-text);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+.pwa-toast p { font-size: 0.9rem; font-weight: 600; }
+.pwa-toast__actions { display: flex; gap: var(--space-2); justify-content: flex-end; }
+.pwa-toast__btn {
+  padding: 6px 14px; border: 1.5px solid var(--color-primary); border-radius: 999px;
+  background: var(--color-white); color: var(--color-primary); font-size: 0.85rem; font-weight: 700; cursor: pointer;
+}
+.pwa-toast__btn--primary { border-color: var(--color-accent); background: var(--color-accent); color: var(--color-on-accent); }

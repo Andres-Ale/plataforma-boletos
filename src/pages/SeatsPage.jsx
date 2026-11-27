@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
 import SeatMap from '../components/SeatMap'
@@ -6,10 +7,33 @@ import SeatLegend from '../components/SeatLegend'
 import StepIndicator from '../components/StepIndicator'
 import OrderSummary from '../components/OrderSummary'
 import { EmptyState } from '../components/StatusViews'
-import { MAX_SEATS } from '../utils/seats'
+import { useCart } from '../context/contexts'
+import { useCatalog } from '../context/contexts'
+import { MAX_SEATS, getEventStatus, getTakenSeats } from '../utils/seats'
 
-function SeatsPage({ event, status, takenSeats, selectedSeats, onToggleSeat, onBack, onContinue }) {
+function SeatsPage() {
+  const { id } = useParams()
+  const { events, orders } = useCatalog()
+  const { cart, toggleSeat } = useCart()
+  const navigate = useNavigate()
   const [notice, setNotice] = useState('')
+
+  const event = events.find((e) => e.id === id)
+  if (!event) {
+    return (
+      <div className="page container">
+        <EmptyState title="Evento no encontrado" actionLabel="Ver eventos" onAction={() => navigate('/eventos')} />
+      </div>
+    )
+  }
+
+  // Valores derivados (no se guardan): estado del evento, asientos ocupados y selección del carrito
+  const status = getEventStatus(event, orders)
+  const takenSeats = getTakenSeats(event, orders)
+  const selectedSeats = cart.eventId === event.id ? cart.seats : []
+  const onToggleSeat = (seatId) => toggleSeat(event.id, seatId)
+  const onBack = () => navigate(`/eventos/${event.id}`)
+  const onContinue = () => navigate('/carrito')
 
   if (status !== 'available') {
     return (

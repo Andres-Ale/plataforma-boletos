@@ -50,7 +50,7 @@ function CartPanel({ open, event, seats, onClose, onRemoveSeat, onCheckout }) {
             <span>Total</span>
             <strong>{formatPrice(getSeatsTotal(event, seats))}</strong>
           </p>
-          <Button block onClick={onCheckout}>Ir a pagar</Button>
+          <Button block onClick={onCheckout}>Ver carrito y pagar</Button>
         </>
       )}
     </aside>

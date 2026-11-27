@@ -1,8 +1,16 @@
+import { useNavigate } from 'react-router'
 import TicketCard from '../components/TicketCard'
+import { useAuth } from '../context/contexts'
+import { useCatalog } from '../context/contexts'
 import { EmptyState } from '../components/StatusViews'
 
-function MyTicketsPage({ orders, events, onGoEvents }) {
-  const mine = [...orders].reverse() // las más recientes primero
+function MyTicketsPage() {
+  const { user } = useAuth()
+  const { orders, events } = useCatalog()
+  const navigate = useNavigate()
+  const onGoEvents = () => navigate('/eventos')
+  // Solo las órdenes del usuario, las más recientes primero
+  const mine = orders.filter((o) => o.userId === user.id).reverse()
 
   return (
     <div className="page container">

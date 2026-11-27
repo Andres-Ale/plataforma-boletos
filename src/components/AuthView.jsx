@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
-import { DEMO_ACCOUNTS, DEMO_PASSWORD, loginUser, registerUser, requestPasswordReset } from "../services/auth";
+import { DEMO_ACCOUNTS, DEMO_PASSWORD, requestPasswordReset } from "../api/auth";
+import { useAuth } from "../context/contexts";
 import "./AuthSection.css";
 
 export default function AuthView({
@@ -8,7 +9,10 @@ export default function AuthView({
   onAuthSuccess,
   onNavigate,
 }) {
+  const { login, register } = useAuth();
   const [mode, setMode] = useState(initialMode); // "login" | "register" | "recover"
+  const [busy, setBusy] = useState(false); // operación en curso contra la API falsa
+  const busyRef = useRef(false); // evita el doble envío aunque se pulse muy rápido
 
   // Estados Login
   const [loginEmail, setLoginEmail] = useState("");
@@ -43,26 +47,32 @@ export default function AuthView({
     setFeedback(null);
   };
 
+  // Ejecuta una operación de la API falsa: bloquea el doble envío y muestra el error si falla
+  const runAuth = async (operation, successText) => {
+    if (busyRef.current) return;
+    busyRef.current = true;
+    setBusy(true);
+    setFeedback(null);
+    try {
+      const user = await operation();
+      if (!mountedRef.current) return;
+      setFeedback({ type: "success", text: successText(user) });
+      if (onAuthSuccess) onAuthSuccess(user);
+    } catch (err) {
+      if (!mountedRef.current) return;
+      setFeedback({ type: "error", text: err.message });
+    } finally {
+      busyRef.current = false;
+      if (mountedRef.current) setBusy(false);
+    }
+  };
+
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    setFeedback(null);
-
-    const result = loginUser({
-      email: loginEmail,
-      password: loginPassword,
-      remember: rememberMe,
-    });
-
-    if (!result.ok) {
-      setFeedback({ type: "error", text: result.error });
-      return;
-    }
-
-    setFeedback({
-      type: "success",
-      text: `¡Bienvenido de nuevo, ${result.user.name}!`,
-    });
-    if (onAuthSuccess) onAuthSuccess(result.user);
+    runAuth(
+      () => login({ email: loginEmail, password: loginPassword, remember: rememberMe }),
+      (user) => `¡Bienvenido de nuevo, ${user.name}!`
+    );
   };
 
   const handleRegisterSubmit = (e) => {
@@ -85,22 +95,10 @@ export default function AuthView({
       return;
     }
 
-    const result = registerUser({
-      name: regName,
-      email: regEmail,
-      password: regPassword,
-    });
-
-    if (!result.ok) {
-      setFeedback({ type: "error", text: result.error });
-      return;
-    }
-
-    setFeedback({
-      type: "success",
-      text: `¡Cuenta creada! Sesión iniciada como ${result.user.name}.`,
-    });
-    if (onAuthSuccess) onAuthSuccess(result.user);
+    runAuth(
+      () => register({ name: regName, email: regEmail, password: regPassword }),
+      (user) => `¡Cuenta creada! Sesión iniciada como ${user.name}.`
+    );
   };
 
   const handleRecoverSubmit = async (e) => {
@@ -108,26 +106,27 @@ export default function AuthView({
     if (recoverStatus === "sending") return; // evita doble envío
     setFeedback(null);
     setRecoverStatus("sending");
-    const result = await requestPasswordReset(recoverEmail);
-    if (!mountedRef.current) return;
-    setRecoverStatus("idle");
-    setFeedback(
-      result.ok
-        ? { type: "success", text: `Si ${recoverEmail.trim()} está registrado, recibirás instrucciones para restablecer tu contraseña. (Simulación: no se envía ningún correo real.)` }
-        : { type: "error", text: result.error }
-    );
+    try {
+      await requestPasswordReset(recoverEmail);
+      if (!mountedRef.current) return;
+      setRecoverStatus("idle");
+      setFeedback({
+        type: "success",
+        text: `Si ${recoverEmail.trim()} está registrado, recibirás instrucciones para restablecer tu contraseña. (Simulación: no se envía ningún correo real.)`,
+      });
+    } catch (err) {
+      if (!mountedRef.current) return;
+      setRecoverStatus("idle");
+      setFeedback({ type: "error", text: err.message });
+    }
   };
 
   // Inicio de sesión social simulado: entra con la primera cuenta de demostración
   const handleDemoGoogle = () => {
-    const result = loginUser({
-      email: DEMO_ACCOUNTS[0].email,
-      password: DEMO_PASSWORD,
-      remember: true,
-    });
-    if (result.ok && onAuthSuccess) {
-      onAuthSuccess(result.user);
-    }
+    runAuth(
+      () => login({ email: DEMO_ACCOUNTS[0].email, password: DEMO_PASSWORD, remember: true }),
+      (user) => `¡Bienvenido, ${user.name}!`
+    );
   };
 
   return (
@@ -237,7 +236,7 @@ export default function AuthView({
                   </button>
                 </div>
 
-                <button type="submit" className="btn-orange auth-submit">
+                <button type="submit" className="btn-orange auth-submit" disabled={busy}>
                   Iniciar sesión →
                 </button>
 
@@ -410,7 +409,7 @@ export default function AuthView({
                   </span>
                 </label>
 
-                <button type="submit" className="btn-orange auth-submit">
+                <button type="submit" className="btn-orange auth-submit" disabled={busy}>
                   Registrarse →
                 </button>
               </form>
