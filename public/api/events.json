@@ -1,0 +1,162 @@
+[
+  {
+    "id": "turandot",
+    "title": "Turandot",
+    "subtitle": "Ópera en tres actos de Giacomo Puccini",
+    "kind": "Ópera",
+    "category": "Grandes Operas",
+    "date": "2026-12-05T20:00:00",
+    "venue": "Teatro Alla Scala",
+    "city": "Milán",
+    "duration": "135 minutos (incluye un intermedio de 20 min)",
+    "rating": "Todo público / Recomendado +10 años",
+    "synopsis": "En la Pekín legendaria, la princesa Turandot somete a sus pretendientes a tres enigmas mortales. Solo el príncipe Calaf se atreve a resolverlos, en una obra que incluye la célebre aria «Nessun dorma».",
+    "prices": {
+      "vip": 75,
+      "diamante": 40,
+      "palco": 90
+    },
+    "occupied": [],
+    "image": "images/events/turandot.webp"
+  },
+  {
+    "id": "la-traviata",
+    "title": "La traviata",
+    "subtitle": "Ópera en tres actos de Giuseppe Verdi",
+    "kind": "Ópera",
+    "category": "Grandes Operas",
+    "date": "2026-12-10T19:30:00",
+    "venue": "Teatro Alla Scala",
+    "city": "Milán",
+    "duration": "140 minutos (incluye dos intermedios)",
+    "rating": "Todo público / Recomendado +12 años",
+    "synopsis": "La cortesana Violetta Valéry encuentra el amor verdadero en el joven Alfredo, pero las presiones de la sociedad parisina ponen a prueba su felicidad y su destino.",
+    "prices": {
+      "vip": 65,
+      "diamante": 35,
+      "palco": 80
+    },
+    "occupied": [],
+    "image": "images/events/la-traviata.webp"
+  },
+  {
+    "id": "carmen",
+    "title": "Carmen",
+    "subtitle": "Ópera en cuatro actos de Georges Bizet",
+    "kind": "Ópera",
+    "category": "Grandes Operas",
+    "date": "2027-04-05T20:00:00",
+    "venue": "Teatro de la Maestranza",
+    "city": "Sevilla",
+    "duration": "165 minutos (incluye un intermedio de 20 min)",
+    "rating": "Todo público / Recomendado +12 años",
+    "synopsis": "Ambientada en la Sevilla de 1830, Carmen narra la apasionante historia de la libre y fascinante gitana Carmen y el soldado Don José. Una obra maestra de la música lírica que combina pasión, celos y hermosas arias como la inolvidable Habanera.",
+    "prices": {
+      "vip": 60,
+      "diamante": 45,
+      "palco": 70
+    },
+    "occupied": [],
+    "image": "images/events/carmen.webp"
+  },
+  {
+    "id": "i-pagliacci",
+    "title": "I Pagliacci",
+    "subtitle": "Ópera en dos actos de Ruggero Leoncavallo",
+    "kind": "Ópera",
+    "category": "Grandes Operas",
+    "date": "2027-04-12T20:30:00",
+    "venue": "Teatro Alla Scala",
+    "city": "Milán",
+    "duration": "75 minutos (sin intermedio)",
+    "rating": "Recomendado +14 años",
+    "synopsis": "Una compañía de comediantes llega a un pueblo del sur de Italia. Entre risas en escena, los celos de Canio, el payaso, convierten la función en una tragedia.",
+    "prices": {
+      "vip": 50,
+      "diamante": 25,
+      "palco": 60
+    },
+    "occupied": [],
+    "image": "images/events/i-pagliacci.webp"
+  },
+  {
+    "id": "hans-zimmer",
+    "title": "Hans Zimmer",
+    "subtitle": "Concierto sinfónico: la música de Hans Zimmer",
+    "kind": "Concierto",
+    "category": "Cine y Conciertos Sinfónicos",
+    "date": "2027-04-15T20:00:00",
+    "venue": "Teatro Alla Scala",
+    "city": "Milán",
+    "duration": "120 minutos (incluye un intermedio de 15 min)",
+    "rating": "Todo público",
+    "synopsis": "Un recorrido sinfónico por las bandas sonoras más icónicas de Hans Zimmer, de El Rey León a Interstellar, interpretadas por orquesta y coro en vivo.",
+    "prices": {
+      "vip": 90,
+      "diamante": 45,
+      "palco": 85
+    },
+    "occupied": [],
+    "image": "images/events/hans-zimmer.webp"
+  },
+  {
+    "id": "john-williams",
+    "title": "John Williams",
+    "subtitle": "Concierto sinfónico: la música de John Williams",
+    "kind": "Concierto",
+    "category": "Cine y Conciertos Sinfónicos",
+    "date": "2027-05-01T19:30:00",
+    "venue": "LA Philharmonic",
+    "city": "Los Ángeles",
+    "duration": "125 minutos (incluye un intermedio de 20 min)",
+    "rating": "Todo público",
+    "synopsis": "La orquesta repasa las melodías que definieron el cine moderno: La guerra de las galaxias, Indiana Jones, Harry Potter y más, en una noche para toda la familia.",
+    "prices": {
+      "vip": 100,
+      "diamante": 50,
+      "palco": 95
+    },
+    "occupied": [],
+    "image": "images/events/john-williams.webp"
+  },
+  {
+    "id": "einaudi",
+    "title": "Einaudi",
+    "subtitle": "Recital de piano: Ludovico Einaudi",
+    "kind": "Concierto",
+    "category": "Cine y Conciertos Sinfónicos",
+    "date": "2027-05-05T20:00:00",
+    "venue": "Teatro La Fenice",
+    "city": "Venecia",
+    "duration": "110 minutos (sin intermedio)",
+    "rating": "Todo público",
+    "synopsis": "Piano, cuerdas y silencios: una velada íntima con las composiciones más queridas de Ludovico Einaudi, de «Nuvole Bianche» a «Experience».",
+    "prices": {
+      "vip": 70,
+      "diamante": 35,
+      "palco": 65
+    },
+    "occupied": [],
+    "image": "images/events/einaudi.webp"
+  },
+  {
+    "id": "morricone",
+    "title": "Morricone",
+    "subtitle": "Concierto sinfónico: la música de Ennio Morricone",
+    "kind": "Concierto",
+    "category": "Cine y Conciertos Sinfónicos",
+    "date": "2027-06-12T20:00:00",
+    "venue": "Auditorio Nacional",
+    "city": "",
+    "duration": "115 minutos (incluye un intermedio de 15 min)",
+    "rating": "Todo público",
+    "synopsis": "El maestro del western espagueti y del cine de autor en una noche sinfónica: «El bueno, el feo y el malo», «Cinema Paradiso» y «La misión».",
+    "prices": {
+      "vip": 80,
+      "diamante": 40,
+      "palco": 75
+    },
+    "occupied": [],
+    "image": "images/events/morricone.webp"
+  }
+]

@@ -1,4 +1,5 @@
-import { getSeatsTotal, sortSeats } from './seats'
+import { BASE } from '../api/client'
+import { getSeatPrice, getSeatsTotal, getSeatZone, sortSeats } from './seats'
 
 function generateOrderId(existingOrders) {
   let id
@@ -15,6 +16,8 @@ export function buildOrder({ event, seats, user, method, orders }) {
     eventId: event.id,
     seats: sortSeats(seats),
     total: getSeatsTotal(event, seats),
+    // Precio de cada asiento al momento de la compra (los reportes no cambian si luego se editan los precios)
+    items: sortSeats(seats).map((seat) => ({ seat, zone: getSeatZone(seat), price: getSeatPrice(event, seat) })),
     method,
     userId: user.id,
     userName: user.name,
@@ -22,3 +25,6 @@ export function buildOrder({ event, seats, user, method, orders }) {
     createdAt: new Date().toISOString(),
   }
 }
+
+// URL que codifica el QR: abre la página de verificación del boleto (funciona con el `base` de GitHub Pages)
+export const buildVerifyUrl = (orderId) => `${window.location.origin}${BASE}verificar/${encodeURIComponent(orderId)}`

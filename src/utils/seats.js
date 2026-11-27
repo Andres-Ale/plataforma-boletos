@@ -69,3 +69,39 @@ export function groupSeatsByZone(event, seats) {
     })
     .filter((group) => group.seats.length > 0)
 }
+
+// ---- Inventario por zona (panel administrativo) ----
+// Los asientos de cada zona (Palco reúne A, B y C)
+export const ZONE_SEATS = {
+  vip: SEAT_LAYOUT.vip,
+  diamante: SEAT_LAYOUT.diamante,
+  palco: [...SEAT_LAYOUT.palcoA, ...SEAT_LAYOUT.palcoB, ...SEAT_LAYOUT.palcoC],
+}
+
+export const getSoldSeats = (event, orders) =>
+  new Set(orders.filter((o) => o.eventId === event.id).flatMap((o) => o.seats))
+
+// Capacidad, vendidos (por órdenes), bloqueados (por el administrador) y disponibles de una zona
+export function getZoneStats(event, orders, zone) {
+  const sold = getSoldSeats(event, orders)
+  const seats = ZONE_SEATS[zone]
+  const soldCount = seats.filter((id) => sold.has(id)).length
+  const blockedCount = seats.filter((id) => !sold.has(id) && event.occupied.includes(id)).length
+  return {
+    capacity: seats.length,
+    sold: soldCount,
+    blocked: blockedCount,
+    available: seats.length - soldCount - blockedCount,
+  }
+}
+
+// Devuelve la nueva lista de asientos bloqueados para que la zona quede con `available` libres.
+// Nunca toca asientos ya vendidos.
+export function setZoneAvailability(event, orders, zone, available) {
+  const sold = getSoldSeats(event, orders)
+  const freeable = ZONE_SEATS[zone].filter((id) => !sold.has(id))
+  const target = Math.min(Math.max(0, Math.floor(available)), freeable.length)
+  const toBlock = new Set(freeable.slice(target)) // se bloquean los últimos de la zona
+  const otherZones = event.occupied.filter((id) => getSeatZone(id) !== zone)
+  return [...otherZones, ...toBlock]
+}

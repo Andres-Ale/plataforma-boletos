@@ -1,0 +1,51 @@
+[
+  {
+    "id": "usr-luis-pacheco",
+    "name": "Luis Pacheco",
+    "email": "luis.pacheco@easyticket.com",
+    "password": "Password123!",
+    "role": "cliente"
+  },
+  {
+    "id": "usr-andres-ale",
+    "name": "Andrés Ale",
+    "email": "andres.ale@easyticket.com",
+    "password": "Password123!",
+    "role": "administrador"
+  },
+  {
+    "id": "usr-carlos-rivera",
+    "name": "Carlos Rivera",
+    "email": "carlos.rivera@easyticket.com",
+    "password": "Password123!",
+    "role": "organizador"
+  },
+  {
+    "id": "usr-maria-lopez",
+    "name": "María López",
+    "email": "maria.lopez@correo.test",
+    "password": "Password123!",
+    "role": "cliente"
+  },
+  {
+    "id": "usr-jose-hernandez",
+    "name": "José Hernández",
+    "email": "jose.hernandez@correo.test",
+    "password": "Password123!",
+    "role": "cliente"
+  },
+  {
+    "id": "usr-sofia-ramirez",
+    "name": "Sofía Ramírez",
+    "email": "sofia.ramirez@correo.test",
+    "password": "Password123!",
+    "role": "cliente"
+  },
+  {
+    "id": "usr-diego-castro",
+    "name": "Diego Castro",
+    "email": "diego.castro@correo.test",
+    "password": "Password123!",
+    "role": "cliente"
+  }
+]

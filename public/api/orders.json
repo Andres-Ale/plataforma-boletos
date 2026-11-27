@@ -1,0 +1,1122 @@
+[
+  {
+    "id": "ET-2026-41935",
+    "eventId": "turandot",
+    "seats": [
+      "V4",
+      "A2"
+    ],
+    "total": 165,
+    "items": [
+      {
+        "seat": "V4",
+        "zone": "vip",
+        "price": 75
+      },
+      {
+        "seat": "A2",
+        "zone": "palco",
+        "price": 90
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-08-06T10:47:00.000Z"
+  },
+  {
+    "id": "ET-2026-79609",
+    "eventId": "morricone",
+    "seats": [
+      "V1",
+      "B2",
+      "V4"
+    ],
+    "total": 235,
+    "items": [
+      {
+        "seat": "V1",
+        "zone": "vip",
+        "price": 80
+      },
+      {
+        "seat": "B2",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "V4",
+        "zone": "vip",
+        "price": 80
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-08-07T14:09:00.000Z"
+  },
+  {
+    "id": "ET-2026-12510",
+    "eventId": "i-pagliacci",
+    "seats": [
+      "A1"
+    ],
+    "total": 60,
+    "items": [
+      {
+        "seat": "A1",
+        "zone": "palco",
+        "price": 60
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-08-09T14:27:00.000Z"
+  },
+  {
+    "id": "ET-2026-81913",
+    "eventId": "la-traviata",
+    "seats": [
+      "D5",
+      "B1",
+      "A4",
+      "C2"
+    ],
+    "total": 275,
+    "items": [
+      {
+        "seat": "D5",
+        "zone": "diamante",
+        "price": 35
+      },
+      {
+        "seat": "B1",
+        "zone": "palco",
+        "price": 80
+      },
+      {
+        "seat": "A4",
+        "zone": "palco",
+        "price": 80
+      },
+      {
+        "seat": "C2",
+        "zone": "palco",
+        "price": 80
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-08-09T16:13:00.000Z"
+  },
+  {
+    "id": "ET-2026-77937",
+    "eventId": "la-traviata",
+    "seats": [
+      "V1",
+      "C3",
+      "D12",
+      "D6"
+    ],
+    "total": 215,
+    "items": [
+      {
+        "seat": "V1",
+        "zone": "vip",
+        "price": 65
+      },
+      {
+        "seat": "C3",
+        "zone": "palco",
+        "price": 80
+      },
+      {
+        "seat": "D12",
+        "zone": "diamante",
+        "price": 35
+      },
+      {
+        "seat": "D6",
+        "zone": "diamante",
+        "price": 35
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-08-10T11:04:00.000Z"
+  },
+  {
+    "id": "ET-2026-31989",
+    "eventId": "john-williams",
+    "seats": [
+      "A4",
+      "V4"
+    ],
+    "total": 195,
+    "items": [
+      {
+        "seat": "A4",
+        "zone": "palco",
+        "price": 95
+      },
+      {
+        "seat": "V4",
+        "zone": "vip",
+        "price": 100
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-08-10T18:00:00.000Z"
+  },
+  {
+    "id": "ET-2026-69949",
+    "eventId": "carmen",
+    "seats": [
+      "A3",
+      "D4",
+      "C5"
+    ],
+    "total": 185,
+    "items": [
+      {
+        "seat": "A3",
+        "zone": "palco",
+        "price": 70
+      },
+      {
+        "seat": "D4",
+        "zone": "diamante",
+        "price": 45
+      },
+      {
+        "seat": "C5",
+        "zone": "palco",
+        "price": 70
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-08-12T10:22:00.000Z"
+  },
+  {
+    "id": "ET-2026-37771",
+    "eventId": "john-williams",
+    "seats": [
+      "C7",
+      "D3"
+    ],
+    "total": 145,
+    "items": [
+      {
+        "seat": "C7",
+        "zone": "palco",
+        "price": 95
+      },
+      {
+        "seat": "D3",
+        "zone": "diamante",
+        "price": 50
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-08-21T18:46:00.000Z"
+  },
+  {
+    "id": "ET-2026-73138",
+    "eventId": "morricone",
+    "seats": [
+      "B1",
+      "D4",
+      "C5"
+    ],
+    "total": 190,
+    "items": [
+      {
+        "seat": "B1",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "D4",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "C5",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-08-23T11:17:00.000Z"
+  },
+  {
+    "id": "ET-2026-91525",
+    "eventId": "john-williams",
+    "seats": [
+      "D9"
+    ],
+    "total": 50,
+    "items": [
+      {
+        "seat": "D9",
+        "zone": "diamante",
+        "price": 50
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-08-24T12:33:00.000Z"
+  },
+  {
+    "id": "ET-2026-70263",
+    "eventId": "morricone",
+    "seats": [
+      "D6",
+      "V5",
+      "V3",
+      "C3"
+    ],
+    "total": 275,
+    "items": [
+      {
+        "seat": "D6",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "V5",
+        "zone": "vip",
+        "price": 80
+      },
+      {
+        "seat": "V3",
+        "zone": "vip",
+        "price": 80
+      },
+      {
+        "seat": "C3",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-08-25T15:36:00.000Z"
+  },
+  {
+    "id": "ET-2026-88995",
+    "eventId": "einaudi",
+    "seats": [
+      "D6"
+    ],
+    "total": 35,
+    "items": [
+      {
+        "seat": "D6",
+        "zone": "diamante",
+        "price": 35
+      }
+    ],
+    "method": "card",
+    "userId": "usr-jose-hernandez",
+    "userName": "José Hernández",
+    "userEmail": "jose.hernandez@correo.test",
+    "createdAt": "2026-08-26T19:18:00.000Z"
+  },
+  {
+    "id": "ET-2026-65442",
+    "eventId": "morricone",
+    "seats": [
+      "D13",
+      "A1",
+      "C7"
+    ],
+    "total": 190,
+    "items": [
+      {
+        "seat": "D13",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "A1",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "C7",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-08-28T14:13:00.000Z"
+  },
+  {
+    "id": "ET-2026-28901",
+    "eventId": "turandot",
+    "seats": [
+      "V3",
+      "C6"
+    ],
+    "total": 165,
+    "items": [
+      {
+        "seat": "V3",
+        "zone": "vip",
+        "price": 75
+      },
+      {
+        "seat": "C6",
+        "zone": "palco",
+        "price": 90
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-08-30T19:30:00.000Z"
+  },
+  {
+    "id": "ET-2026-73235",
+    "eventId": "morricone",
+    "seats": [
+      "D9",
+      "C6",
+      "D11"
+    ],
+    "total": 155,
+    "items": [
+      {
+        "seat": "D9",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "C6",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "D11",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-jose-hernandez",
+    "userName": "José Hernández",
+    "userEmail": "jose.hernandez@correo.test",
+    "createdAt": "2026-08-31T21:53:00.000Z"
+  },
+  {
+    "id": "ET-2026-37117",
+    "eventId": "hans-zimmer",
+    "seats": [
+      "V6"
+    ],
+    "total": 90,
+    "items": [
+      {
+        "seat": "V6",
+        "zone": "vip",
+        "price": 90
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-09-02T14:14:00.000Z"
+  },
+  {
+    "id": "ET-2026-28853",
+    "eventId": "hans-zimmer",
+    "seats": [
+      "C4"
+    ],
+    "total": 85,
+    "items": [
+      {
+        "seat": "C4",
+        "zone": "palco",
+        "price": 85
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-09-03T15:04:00.000Z"
+  },
+  {
+    "id": "ET-2026-71213",
+    "eventId": "morricone",
+    "seats": [
+      "D8",
+      "D2"
+    ],
+    "total": 80,
+    "items": [
+      {
+        "seat": "D8",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "D2",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-09-06T12:44:00.000Z"
+  },
+  {
+    "id": "ET-2026-27216",
+    "eventId": "morricone",
+    "seats": [
+      "B4",
+      "C2",
+      "D10",
+      "A4"
+    ],
+    "total": 265,
+    "items": [
+      {
+        "seat": "B4",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "C2",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "D10",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "A4",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-09-22T14:31:00.000Z"
+  },
+  {
+    "id": "ET-2026-75557",
+    "eventId": "hans-zimmer",
+    "seats": [
+      "D4",
+      "V2",
+      "D5",
+      "D11"
+    ],
+    "total": 225,
+    "items": [
+      {
+        "seat": "D4",
+        "zone": "diamante",
+        "price": 45
+      },
+      {
+        "seat": "V2",
+        "zone": "vip",
+        "price": 90
+      },
+      {
+        "seat": "D5",
+        "zone": "diamante",
+        "price": 45
+      },
+      {
+        "seat": "D11",
+        "zone": "diamante",
+        "price": 45
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-09-23T19:51:00.000Z"
+  },
+  {
+    "id": "ET-2026-52447",
+    "eventId": "hans-zimmer",
+    "seats": [
+      "D14",
+      "B2"
+    ],
+    "total": 130,
+    "items": [
+      {
+        "seat": "D14",
+        "zone": "diamante",
+        "price": 45
+      },
+      {
+        "seat": "B2",
+        "zone": "palco",
+        "price": 85
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-10-02T13:42:00.000Z"
+  },
+  {
+    "id": "ET-2026-55566",
+    "eventId": "carmen",
+    "seats": [
+      "D10",
+      "B2",
+      "V3"
+    ],
+    "total": 175,
+    "items": [
+      {
+        "seat": "D10",
+        "zone": "diamante",
+        "price": 45
+      },
+      {
+        "seat": "B2",
+        "zone": "palco",
+        "price": 70
+      },
+      {
+        "seat": "V3",
+        "zone": "vip",
+        "price": 60
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-10-02T19:24:00.000Z"
+  },
+  {
+    "id": "ET-2026-99573",
+    "eventId": "turandot",
+    "seats": [
+      "D2"
+    ],
+    "total": 40,
+    "items": [
+      {
+        "seat": "D2",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-10-06T12:40:00.000Z"
+  },
+  {
+    "id": "ET-2026-84481",
+    "eventId": "einaudi",
+    "seats": [
+      "D7",
+      "A3"
+    ],
+    "total": 100,
+    "items": [
+      {
+        "seat": "D7",
+        "zone": "diamante",
+        "price": 35
+      },
+      {
+        "seat": "A3",
+        "zone": "palco",
+        "price": 65
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-jose-hernandez",
+    "userName": "José Hernández",
+    "userEmail": "jose.hernandez@correo.test",
+    "createdAt": "2026-10-06T21:26:00.000Z"
+  },
+  {
+    "id": "ET-2026-80345",
+    "eventId": "turandot",
+    "seats": [
+      "D8"
+    ],
+    "total": 40,
+    "items": [
+      {
+        "seat": "D8",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-10-07T10:41:00.000Z"
+  },
+  {
+    "id": "ET-2026-94042",
+    "eventId": "morricone",
+    "seats": [
+      "D12",
+      "C1"
+    ],
+    "total": 115,
+    "items": [
+      {
+        "seat": "D12",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "C1",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-10-07T15:36:00.000Z"
+  },
+  {
+    "id": "ET-2026-60875",
+    "eventId": "john-williams",
+    "seats": [
+      "B3"
+    ],
+    "total": 95,
+    "items": [
+      {
+        "seat": "B3",
+        "zone": "palco",
+        "price": 95
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-10-10T11:26:00.000Z"
+  },
+  {
+    "id": "ET-2026-12688",
+    "eventId": "i-pagliacci",
+    "seats": [
+      "V5"
+    ],
+    "total": 50,
+    "items": [
+      {
+        "seat": "V5",
+        "zone": "vip",
+        "price": 50
+      }
+    ],
+    "method": "card",
+    "userId": "usr-sofia-ramirez",
+    "userName": "Sofía Ramírez",
+    "userEmail": "sofia.ramirez@correo.test",
+    "createdAt": "2026-10-11T10:51:00.000Z"
+  },
+  {
+    "id": "ET-2026-72456",
+    "eventId": "i-pagliacci",
+    "seats": [
+      "B4",
+      "D13",
+      "D7",
+      "C1"
+    ],
+    "total": 170,
+    "items": [
+      {
+        "seat": "B4",
+        "zone": "palco",
+        "price": 60
+      },
+      {
+        "seat": "D13",
+        "zone": "diamante",
+        "price": 25
+      },
+      {
+        "seat": "D7",
+        "zone": "diamante",
+        "price": 25
+      },
+      {
+        "seat": "C1",
+        "zone": "palco",
+        "price": 60
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-10-16T12:52:00.000Z"
+  },
+  {
+    "id": "ET-2026-75197",
+    "eventId": "morricone",
+    "seats": [
+      "B3",
+      "C4"
+    ],
+    "total": 150,
+    "items": [
+      {
+        "seat": "B3",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "C4",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-10-17T19:29:00.000Z"
+  },
+  {
+    "id": "ET-2026-42839",
+    "eventId": "la-traviata",
+    "seats": [
+      "V7"
+    ],
+    "total": 65,
+    "items": [
+      {
+        "seat": "V7",
+        "zone": "vip",
+        "price": 65
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-10-21T16:55:00.000Z"
+  },
+  {
+    "id": "ET-2026-20713",
+    "eventId": "carmen",
+    "seats": [
+      "V2",
+      "D3"
+    ],
+    "total": 105,
+    "items": [
+      {
+        "seat": "V2",
+        "zone": "vip",
+        "price": 60
+      },
+      {
+        "seat": "D3",
+        "zone": "diamante",
+        "price": 45
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-10-28T14:22:00.000Z"
+  },
+  {
+    "id": "ET-2026-97293",
+    "eventId": "morricone",
+    "seats": [
+      "D7",
+      "D14",
+      "V2"
+    ],
+    "total": 160,
+    "items": [
+      {
+        "seat": "D7",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "D14",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "V2",
+        "zone": "vip",
+        "price": 80
+      }
+    ],
+    "method": "paypal",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-10-28T15:47:00.000Z"
+  },
+  {
+    "id": "ET-2026-64675",
+    "eventId": "john-williams",
+    "seats": [
+      "D2"
+    ],
+    "total": 50,
+    "items": [
+      {
+        "seat": "D2",
+        "zone": "diamante",
+        "price": 50
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-10-28T18:28:00.000Z"
+  },
+  {
+    "id": "ET-2026-77516",
+    "eventId": "hans-zimmer",
+    "seats": [
+      "A2"
+    ],
+    "total": 85,
+    "items": [
+      {
+        "seat": "A2",
+        "zone": "palco",
+        "price": 85
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-11-04T12:59:00.000Z"
+  },
+  {
+    "id": "ET-2026-82261",
+    "eventId": "morricone",
+    "seats": [
+      "V6",
+      "D3"
+    ],
+    "total": 120,
+    "items": [
+      {
+        "seat": "V6",
+        "zone": "vip",
+        "price": 80
+      },
+      {
+        "seat": "D3",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-11-04T20:36:00.000Z"
+  },
+  {
+    "id": "ET-2026-40520",
+    "eventId": "morricone",
+    "seats": [
+      "V7",
+      "D1",
+      "A3",
+      "D5"
+    ],
+    "total": 235,
+    "items": [
+      {
+        "seat": "V7",
+        "zone": "vip",
+        "price": 80
+      },
+      {
+        "seat": "D1",
+        "zone": "diamante",
+        "price": 40
+      },
+      {
+        "seat": "A3",
+        "zone": "palco",
+        "price": 75
+      },
+      {
+        "seat": "D5",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "card",
+    "userId": "usr-diego-castro",
+    "userName": "Diego Castro",
+    "userEmail": "diego.castro@correo.test",
+    "createdAt": "2026-11-05T20:51:00.000Z"
+  },
+  {
+    "id": "ET-2026-23906",
+    "eventId": "morricone",
+    "seats": [
+      "A2"
+    ],
+    "total": 75,
+    "items": [
+      {
+        "seat": "A2",
+        "zone": "palco",
+        "price": 75
+      }
+    ],
+    "method": "card",
+    "userId": "usr-jose-hernandez",
+    "userName": "José Hernández",
+    "userEmail": "jose.hernandez@correo.test",
+    "createdAt": "2026-11-10T20:41:00.000Z"
+  },
+  {
+    "id": "ET-2026-63626",
+    "eventId": "turandot",
+    "seats": [
+      "B3",
+      "D9"
+    ],
+    "total": 130,
+    "items": [
+      {
+        "seat": "B3",
+        "zone": "palco",
+        "price": 90
+      },
+      {
+        "seat": "D9",
+        "zone": "diamante",
+        "price": 40
+      }
+    ],
+    "method": "card",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-11-11T21:54:00.000Z"
+  },
+  {
+    "id": "ET-2026-71977",
+    "eventId": "einaudi",
+    "seats": [
+      "V1",
+      "C3",
+      "V2",
+      "D8"
+    ],
+    "total": 240,
+    "items": [
+      {
+        "seat": "V1",
+        "zone": "vip",
+        "price": 70
+      },
+      {
+        "seat": "C3",
+        "zone": "palco",
+        "price": 65
+      },
+      {
+        "seat": "V2",
+        "zone": "vip",
+        "price": 70
+      },
+      {
+        "seat": "D8",
+        "zone": "diamante",
+        "price": 35
+      }
+    ],
+    "method": "card",
+    "userId": "usr-luis-pacheco",
+    "userName": "Luis Pacheco",
+    "userEmail": "luis.pacheco@easyticket.com",
+    "createdAt": "2026-11-17T14:25:00.000Z"
+  },
+  {
+    "id": "ET-2026-48239",
+    "eventId": "i-pagliacci",
+    "seats": [
+      "D1"
+    ],
+    "total": 25,
+    "items": [
+      {
+        "seat": "D1",
+        "zone": "diamante",
+        "price": 25
+      }
+    ],
+    "method": "bitcoin",
+    "userId": "usr-maria-lopez",
+    "userName": "María López",
+    "userEmail": "maria.lopez@correo.test",
+    "createdAt": "2026-11-26T11:04:00.000Z"
+  }
+]

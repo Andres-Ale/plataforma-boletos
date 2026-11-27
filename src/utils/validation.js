@@ -48,3 +48,29 @@ export function validateCard({ name, number, expiry, cvc }) {
 
   return errors
 }
+
+// ---- Eventos (formulario del panel administrativo y API) ----
+export const EVENT_KINDS = ['Ópera', 'Concierto', 'Teatro', 'Festival']
+
+export function validateEvent(data) {
+  const errors = {}
+  const text = (v) => (typeof v === 'string' ? v.trim() : '')
+
+  if (text(data.title).length < 3) errors.title = 'El título debe tener al menos 3 caracteres.'
+  if (!text(data.category)) errors.category = 'Indica la categoría del evento.'
+  if (!EVENT_KINDS.includes(data.kind)) errors.kind = 'Elige el tipo de evento.'
+  if (!text(data.venue)) errors.venue = 'Indica el recinto o lugar.'
+
+  if (!data.date || Number.isNaN(new Date(data.date).getTime())) {
+    errors.date = 'Indica una fecha y hora válidas.'
+  }
+
+  ;['vip', 'diamante', 'palco'].forEach((zone) => {
+    const price = Number(data.prices?.[zone])
+    if (!Number.isFinite(price) || price <= 0 || price > 9999) {
+      errors[`price_${zone}`] = 'Ingresa un precio entre 1 y 9999.'
+    }
+  })
+
+  return errors
+}

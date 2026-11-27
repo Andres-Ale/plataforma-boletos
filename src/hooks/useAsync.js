@@ -1,29 +1,30 @@
 import { useCallback, useEffect, useState } from 'react'
+import { isAbortError } from '../api/client'
 
 // Ejecuta una función asíncrona y expone { status, data, error, reload }.
-// status: 'loading' | 'success' | 'error'. asyncFn debe ser una referencia estable.
+//  - asyncFn(signal) recibe un AbortSignal: al desmontar o al recargar se cancela la petición anterior.
+//  - status: 'loading' | 'success' | 'error'. asyncFn debe ser una referencia estable (useCallback o módulo).
 export default function useAsync(asyncFn) {
   const [state, setState] = useState({ status: 'loading', data: null, error: null })
   const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
-    let cancelled = false
-    setState({ status: 'loading', data: null, error: null })
+    const controller = new AbortController()
 
-    asyncFn(attempt)
-      .then((data) => {
-        if (!cancelled) setState({ status: 'success', data, error: null })
-      })
+    asyncFn(controller.signal)
+      .then((data) => setState({ status: 'success', data, error: null }))
       .catch((err) => {
-        if (!cancelled) setState({ status: 'error', data: null, error: err.message })
+        if (isAbortError(err)) return // cancelada: no se actualiza el estado
+        setState({ status: 'error', data: null, error: err.message })
       })
 
-    return () => {
-      cancelled = true
-    }
+    return () => controller.abort()
   }, [asyncFn, attempt])
 
-  const reload = useCallback(() => setAttempt((n) => n + 1), [])
+  const reload = useCallback(() => {
+    setState((prev) => ({ ...prev, status: 'loading', error: null }))
+    setAttempt((n) => n + 1)
+  }, [])
 
   return { ...state, reload }
 }
