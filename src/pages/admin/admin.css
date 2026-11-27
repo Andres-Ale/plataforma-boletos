@@ -495,11 +495,11 @@
   }
 
   .admin-reports-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .admin-zone-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -507,18 +507,27 @@
 @media (max-width: 600px) {
   .admin-page {
     padding: var(--space-3) var(--space-2) var(--space-5);
+    overflow-x: clip;
   }
 
   .admin-hero {
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-3);
   }
 
   .admin-hero__title {
     font-size: 1.3rem;
   }
 
+  .admin-hero__subtitle {
+    overflow-wrap: anywhere;
+  }
+
+  .admin-card {
+    padding: var(--space-3);
+  }
+
   .admin-kpis {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .admin-tabs {
@@ -529,9 +538,35 @@
     width: 100%;
     text-align: left;
   }
+
+  .admin-filters,
+  .admin-filter-group,
+  .admin-select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .admin-bar-item__top {
+    flex-wrap: wrap;
+  }
+
+  .admin-map-dark {
+    padding: 10px;
+    overflow-x: auto;
+  }
 }
+
 /* ---- Tercera entrega: CRUD, inventario, reportes ---- */
-.admin-stack { display: grid; gap: var(--space-4); }
+.admin-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+.admin-card,
+.admin-kpi-card,
+.admin-zone-box {
+  min-width: 0;
+}
 .admin-bar-list { list-style: none; margin: 0; padding: 0; }
 .admin-tab, .admin-btn-primary { text-decoration: none; }
 .admin-tab[aria-current='page'] { background-color: var(--color-primary); color: var(--color-white); border-color: var(--color-primary); }
@@ -558,15 +593,15 @@ a.admin-table__link { text-decoration: underline; }
 .admin-empty { padding: var(--space-4) 0; color: var(--color-text-muted); text-align: center; }
 
 /* Formulario de eventos e inventario */
-.admin-form { display: grid; gap: var(--space-3); }
+.admin-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
 .admin-form__title { margin: 0; font-size: 1.2rem; color: var(--color-primary); }
-.admin-form__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.admin-form__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
 .admin-form__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: flex-end; margin-top: var(--space-2); }
 
-.admin-field { display: flex; flex-direction: column; gap: 4px; }
+.admin-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .admin-field label { font-size: 0.85rem; font-weight: 700; color: var(--color-text); }
 .admin-field input, .admin-field select, .admin-field textarea {
-  width: 100%; padding: 9px 12px; border: 1.5px solid #cbd5e1; border-radius: var(--radius);
+  width: 100%; max-width: 100%; padding: 9px 12px; border: 1.5px solid #cbd5e1; border-radius: var(--radius);
   background: var(--color-white); color: var(--color-text); font: inherit;
 }
 .admin-field--error input, .admin-field--error select { border-color: var(--color-error); }
